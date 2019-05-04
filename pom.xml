@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>websocket-demo</artifactId>
+	<artifactId>chat-application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>websocket-demo</name>
-	<description>Spring Boot WebSocket Chat Demo</description>
+	<name>Chat-demo</name>
+	<description>Chat Application Demo</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -30,12 +30,6 @@
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 
-		<!-- RabbitMQ Starter Dependency (Not required if you're using the simple in-memory broker for STOMP) -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-amqp</artifactId>
-		</dependency>
-
 		<!-- Following dependency is required for Full Featured STOMP Broker Relay -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
@@ -53,6 +47,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -61,30 +62,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- This plugin is used to create a docker image and publish the image to docker hub-->
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>dockerfile-maven-plugin</artifactId>
-				<version>1.4.0</version>
-				<configuration>
-					<!-- replace `callicoder` with your docker id-->
-					<repository>callicoder/spring-boot-websocket-chat-demo</repository>
-					<tag>${project.version}</tag>
-					<buildArgs>
-						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-					</buildArgs>
-				</configuration>
-				<executions>
-					<execution>
-						<id>default</id>
-						<phase>install</phase>
-						<goals>
-							<goal>build</goal>
-							<goal>push</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+
 		</plugins>
 	</build>
 </project>
